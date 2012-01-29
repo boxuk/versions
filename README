@@ -15,6 +15,11 @@ Versions is a super-simple library for comparing version numbers.
 (earlier-version? "0.9.0" "0.9.1" ) ; false
 ```
 
+# Caveats
+
+Currently versions only handles numerical versions, it does not take into
+account formats like release candidates, or beta/alpha strings, etc...
+
 ## License
 
 Dual licensed under GPLv2 and MIT.
