@@ -13,7 +13,7 @@
     "Breaks 2 version number strings into interleaved pairs"
     [current-version next-version]
     (map
-        (fn [x y] (list (Integer/parseInt x) (Integer/parseInt y)))
+        #(list (Integer/parseInt %1) (Integer/parseInt %2))
         (split-versions current-version)
         (split-versions next-version)
     ))
