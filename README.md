@@ -11,8 +11,11 @@ Versions is a super-simple library for comparing version numbers.
 (later-version? "1.0.0" "1.0.1") ; true
 (later-version? "2.1.0" "1.2.0") ; false
 
-(earlier-version? "1.0.0" "0.0.9" ) ; true
-(earlier-version? "0.9.0" "0.9.1" ) ; false
+(earlier-version? "1.0" "0.0.9" ) ; true
+(earlier-version? "0.9.0" "0.10" ) ; false
+
+(same-version? "0.1" "0.1.0.0.0.0" ) ; true
+(same-version? "2.1" "1.2") ; false
 ```
 
 # Caveats
