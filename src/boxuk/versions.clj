@@ -2,21 +2,27 @@
 (ns boxuk.versions
     (:require [clojure.string :as string]))
 
-(defn- split-versions
-    "Split a version string into parts"
-    [version]
-    (if (nil? version)
-        '[0 0 0]
-        (string/split version #"\.")))
+(defn- version-parts
+    "Break a version string a list of its integer parts"
+    [version-string]
+    (map #(Integer/parseInt %) 
+          (string/split version-string #"\.")))
+
+(defn- zero-pad
+    "Zero pad lst to have the same length as the longest of both lists"
+    [lst rst]
+    (let [lst-length (count lst)
+          req-length (max lst-length (count rst))]
+        (concat lst (repeat (- req-length lst-length) 0))))
 
 (defn- version-pairs
-    "Breaks 2 version number strings into interleaved pairs"
-    [current-version next-version]
-    (map
-        #(list (Integer/parseInt %1) (Integer/parseInt %2))
-        (split-versions current-version)
-        (split-versions next-version)
-    ))
+    "Return pairs of interleaved version numbers"
+    [current previous]
+    (let [current-parts (version-parts current)
+          previous-parts (version-parts previous)]
+        (map #(list %1 %2)
+              (zero-pad current-parts previous-parts)
+              (zero-pad previous-parts current-parts))))
 
 ;; Public
 

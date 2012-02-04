@@ -17,5 +17,6 @@
 
 (deftest test-version-number-of-varying-lengths
     (is (later-version? "1.0.0" "1.1"))
+    (is (later-version? "1.0" "1.0.1"))
     (is (earlier-version? "1.0" "0.0.9")))
 
