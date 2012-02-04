@@ -20,3 +20,8 @@
     (is (later-version? "1.0" "1.0.1"))
     (is (earlier-version? "1.0" "0.0.9")))
 
+(deftest test-same-version
+    (is (same-version? "1.0" "1.0"))
+    (is (same-version? "1.0" "1.0.0.0.0.0"))
+    (is (not (same-version? "1.0" "1.2"))))
+
