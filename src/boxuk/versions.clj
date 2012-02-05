@@ -17,18 +17,38 @@
               other-parts
               (concat current-parts (repeat (count other-parts) 0)))))
 
-(defmacro defcompare [name group operator]
-    "Define a version comparer function"
+(defmacro defcomparer [name success failure]
+    "Define a comparer with success and fail comparisons"
     `(defn ~name
-        [current# other#]
-        (boolean (~group #(~operator (second %) (first %))
-                          (version-pairs current# other#)))))
+         [current# other#]
+         (boolean (reduce #(if (nil? %1) 
+                               (let [[a# b#] %2]
+                                   (cond (~success b# a#) true
+                                         (~failure b# a#) false)) %1)
+                           nil (version-pairs current# other#)))))
+
+(defmacro deffilter [name filterer]
+    "Define a filterer for a version number"
+    `(defn ~name
+         [versions#]
+         (reduce #(if (or (nil? %1)
+                          (~filterer %1 %2)) %2
+                      %1)
+                 nil versions#)))
 
 ;; Public
 
-(defcompare later-version? some >)
+(defcomparer later-version? > <)
 
-(defcompare earlier-version? some <)
+(defcomparer earlier-version? < >)
 
-(defcompare same-version? every? =)
+(defn same-version?
+    "Indicates if two version numbers are the same"
+    [current other]
+    (every? #(= (first %) (second %))
+             (version-pairs current other)))
+
+(deffilter latest-version later-version?)
+
+(deffilter earliest-version earlier-version?)
 

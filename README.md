@@ -5,6 +5,8 @@ Versions is a super-simple library for comparing version numbers.
 
 ## Usage
 
+Just pass version strings to the comparison functions.
+
 ```clojure
 (use boxuk.versions)
 
@@ -16,6 +18,13 @@ Versions is a super-simple library for comparing version numbers.
 
 (same-version? "0.1" "0.1.0.0.0.0" ) ; true
 (same-version? "2.1" "1.2") ; false
+```
+
+You can also filter a sequence for the latest or earliest version.
+
+```clojure
+(latest-version ["1.1" "2.3"]) ; "2.3"
+(earliest-version ["2.4" "3.4.2"]) ; "2.4"
 ```
 
 # Caveats
