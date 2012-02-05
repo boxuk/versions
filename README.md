@@ -27,6 +27,17 @@ You can also filter a sequence for the latest or earliest version.
 (earliest-version ["2.4" "3.4.2"]) ; "2.4"
 ```
 
+# Installation
+
+You can get *versions* via [Clojars](http://clojars.org), just specify it as a dependency
+in your [Leiningen](https://github.com/technomancy/leiningen) project file.
+
+```clojure
+[boxuk.versions "0.1.0"]
+```
+
+*NB:* Replace with latest version, 0.1.0 is just an example.
+
 # Caveats
 
 Currently versions only handles numerical versions, it does not take into
