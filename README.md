@@ -27,21 +27,25 @@ You can also filter a sequence for the latest or earliest version.
 (earliest-version ["2.4" "3.4.2"]) ; "2.4"
 ```
 
-# Installation
+## Stable/Unstable
 
-You can get *versions* via [Clojars](http://clojars.org), just specify it as a dependency
-in your [Leiningen](https://github.com/technomancy/leiningen) project file.
+Versions can make a distinction between stable and unstable versions.
+Unstable versions are anything postfixed with for example _alpha_, _RC_, or _SNAPSHOT_.
 
 ```clojure
-[boxuk.versions "0.1.0"]
+(stable? "1.2.3-SNAPSHOT") ; false
+(unstable? "1.2.3-alpha2") ; true
 ```
 
-*NB:* Replace with latest version, 0.1.0 is just an example.
+The order of comparison for unstable versions is:
 
-# Caveats
+```clojure
+(> "SNAPSHOT" "RC" "beta" "alpha")
+```
 
-Currently versions only handles numerical versions, it does not take into
-account formats like release candidates, or beta/alpha strings, etc...
+# Installation
+
+Versions is available from [Clojars](http://clojars.org/versions)
 
 ## License
 
