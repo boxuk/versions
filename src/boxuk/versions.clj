@@ -77,13 +77,6 @@
   [versions]
   (go-filter earlier-version? versions))
 
-(defn latest-stable
-  "Return latest stable version from seq of versions"
-  [versions]
-  (->> versions
-       (filter stable?)
-       (latest-version)))
-
 (defn unstable? [version-string]
   (some
     #(.contains version-string %)
@@ -91,4 +84,11 @@
 
 (def stable?
   (complement unstable?))
+
+(defn latest-stable
+  "Return latest stable version from seq of versions"
+  [versions]
+  (->> versions
+       (filter stable?)
+       (latest-version)))
 
