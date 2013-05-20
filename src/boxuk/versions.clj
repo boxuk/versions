@@ -3,7 +3,7 @@
   (:require [clojure.string :as string]))
 
 ; ClojureScript (Integer/parseInt) compatibility magic
-;*CLJSBUILD-REMOVE*;(js* "window.Integer = {\"parseInt\": parseInt};")
+;*CLJSBUILD-REMOVE*;(js* "window.Integer = {\"parseInt\": function(i){return parseInt(i,10);}};")
 
 (def unstable-parts
   {"-alpha" ".1."
