@@ -1,5 +1,5 @@
 
-(defproject versions "0.5.0"
+(defproject boxuk/versions "0.5.0"
   :description "Tool for comparing version numbers"
   :dependencies [[org.clojure/clojure "1.5.1"]]
   :plugins [[lein-cljsbuild "0.3.2"]]
