@@ -49,3 +49,6 @@
 (deftest test-getting-latest-stable-version
   (is (= "1.2.3" (latest-stable ["1.2.3-SNAPSHOT", "1.2.3" "1.2.3-alpha2"]))))
 
+(deftest test-unparsable-versions-ignored
+  (is (= "1.2.3" (latest-version ["1.3.3-bad" "1.2.3"]))))
+

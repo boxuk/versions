@@ -17,18 +17,28 @@
       (string/replace acc (str k) (str v)))
     text m))
 
-(defn- replace-unstable-parts [version-string]
+(defn- replace-unstable-parts
+  "Replaces 'unstable' parts of the version string with numbers
+  we can use to do comparisons easily."
+  [version-string]
   (map-replace
     unstable-parts
     version-string))
 
-(defn- version-parts
-  "Break a version string a list of its integer parts"
+(defn- valid-version?
+  "Indicates if the version string is valid.  Needs to have had
+  any unstable parts replaced first."
   [version-string]
-  (map #(Integer/parseInt %)
-       (string/split
-         (replace-unstable-parts version-string)
-         #"\.")))
+  (re-matches #"[\d.]+" version-string))
+
+(defn- version-parts
+  "Break a version string a list of its integer parts."
+  [version-string]
+  (let [version (replace-unstable-parts version-string)]
+    (if (valid-version? version)
+      (map #(Integer/parseInt %)
+           (string/split version #"\."))
+      [])))
 
 (defn- version-pairs
   "Create list of pairs of version numbers"
