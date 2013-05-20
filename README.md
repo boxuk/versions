@@ -49,6 +49,10 @@ The order of comparison for unstable versions is:
 
 Versions is available from [Clojars](http://clojars.org/versions)
 
+## ClojureScript
+
+Versions also supports being used via ClojureScript.
+
 ## License
 
 Dual licensed under GPLv2 and MIT.
