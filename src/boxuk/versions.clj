@@ -79,7 +79,7 @@
 
 (defn unstable? [version-string]
   (some
-    #(.contains version-string %)
+    #(>= (.indexOf version-string %) 0)
     (keys unstable-parts)))
 
 (def stable?
