@@ -36,30 +36,29 @@
          other-parts
          (concat current-parts (repeat (count other-parts) 0)))))
 
-(defmacro defcomparer [name success failure]
-  "Define a comparer with success and fail comparisons"
-  `(defn ~name
-     [current# other#]
-     (boolean (reduce #(if (nil? %1)
-                         (let [[a# b#] %2]
-                           (cond (~success b# a#) true
-                                 (~failure b# a#) false)) %1)
-                      nil (version-pairs current# other#)))))
+(defn go-compare
+  [current other success failure]
+  (boolean (reduce #(if (nil? %1)
+                      (let [[a b] %2]
+                        (cond (success b a) true
+                              (failure b a) false)) %1)
+                   nil (version-pairs current other))))
 
-(defmacro deffilter [name filterer]
-  "Define a filterer for a version number"
-  `(defn ~name
-     [versions#]
-     (reduce #(if (or (nil? %1)
-                      (~filterer %1 %2)) %2
-                %1)
-             nil versions#)))
+(defn go-filter
+  [versions comparer]
+  (reduce #(if (or (nil? %1)
+                   (comparer %1 %2)) %2
+             %1)
+          nil versions))
 
 ;; Public
 
-(defcomparer later-version? > <)
+(defn later-version?
+  [current other]
+  (go-compare current other > <))
 
-(defcomparer earlier-version? < >)
+(def earlier-version?
+  (complement later-version?))
 
 (defn same-version?
   "Indicates if two version numbers are the same"
@@ -67,9 +66,13 @@
   (every? #(= (first %) (second %))
           (version-pairs current other)))
 
-(deffilter latest-version later-version?)
+(defn latest-version
+  [versions]
+  (go-filter versions later-version?))
 
-(deffilter earliest-version earlier-version?)
+(defn earliest-version
+  [versions]
+  (go-filter versions earlier-version?))
 
 (defn unstable? [version-string]
   (some
@@ -77,5 +80,5 @@
     (keys unstable-parts)))
 
 (def stable?
-  (complement stable?))
+  (complement unstable?))
 
