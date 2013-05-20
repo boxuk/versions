@@ -47,7 +47,7 @@ The order of comparison for unstable versions is:
 
 # Installation
 
-Versions is available from [Clojars](http://clojars.org/versions)
+Versions is available from [Clojars](http://clojars.org/boxuk/versions)
 
 ## ClojureScript
 
