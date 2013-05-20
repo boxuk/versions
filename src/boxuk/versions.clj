@@ -2,6 +2,9 @@
 (ns boxuk.versions
   (:require [clojure.string :as string]))
 
+; ClojureScript (Integer/parseInt) compatibility magic
+;*CLJSBUILD-REMOVE*;(js* "window.Integer = {\"parseInt\": parseInt};")
+
 (def unstable-parts
   {"-alpha" ".1."
    "-beta" ".2."
