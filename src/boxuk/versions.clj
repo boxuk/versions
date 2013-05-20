@@ -6,7 +6,7 @@
   {"-alpha" ".1."
    "-beta" ".2."
    "-RC" ".3."
-   "-SNAPSHOT" ".4."})
+   "-SNAPSHOT" ".4"})
 
 (defn- map-replace [m text]
   (reduce
