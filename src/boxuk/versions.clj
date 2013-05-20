@@ -45,13 +45,14 @@
                    nil (version-pairs current other))))
 
 (defn go-filter
-  [versions comparer]
+  [comparer versions]
   (reduce #(if (or (nil? %1)
                    (comparer %1 %2)) %2
              %1)
           nil versions))
 
 ;; Public
+;; ------
 
 (defn later-version?
   [current other]
@@ -67,12 +68,21 @@
           (version-pairs current other)))
 
 (defn latest-version
+  "Return latest version from seq of versions"
   [versions]
-  (go-filter versions later-version?))
+  (go-filter later-version? versions))
 
 (defn earliest-version
+  "Return earlier version from seq of versions"
   [versions]
-  (go-filter versions earlier-version?))
+  (go-filter earlier-version? versions))
+
+(defn latest-stable
+  "Return latest stable version from seq of versions"
+  [versions]
+  (->> versions
+       (filter stable?)
+       (latest-version)))
 
 (defn unstable? [version-string]
   (some

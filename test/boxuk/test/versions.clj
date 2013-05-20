@@ -46,3 +46,6 @@
   (is (unstable? "1.2.3-RC0"))
   (is (unstable? "1.2.3-SNAPSHOT")))
 
+(deftest test-getting-latest-stable-version
+  (is (= "1.2.3" (latest-stable ["1.2.3-SNAPSHOT", "1.2.3" "1.2.3-alpha2"]))))
+

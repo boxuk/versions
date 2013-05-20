@@ -35,6 +35,8 @@ Unstable versions are anything postfixed with for example _alpha_, _RC_, or _SNA
 ```clojure
 (stable? "1.2.3-SNAPSHOT") ; false
 (unstable? "1.2.3-alpha2") ; true
+
+(latest-stable ["1.2.2" "1.2.2-SNAPSHOT"] ; "1.2.2"
 ```
 
 The order of comparison for unstable versions is:
