@@ -52,3 +52,7 @@
 (deftest test-unparsable-versions-ignored
   (is (= "1.2.3" (latest-version ["1.3.3-bad" "1.2.3"]))))
 
+(deftest test-dealing-with-bad-data
+  (is (not (later-version? nil nil)))
+  (is (not (latest-version [nil]))))
+

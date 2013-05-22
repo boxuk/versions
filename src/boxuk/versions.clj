@@ -69,7 +69,9 @@
 
 (defn later-version?
   [current other]
-  (go-compare current other > <))
+  (go-compare (str current)
+              (str other)
+              > <))
 
 (def earlier-version?
   (complement later-version?))
