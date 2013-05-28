@@ -1,5 +1,5 @@
 
-# Versions
+# Versions [![Build Status](https://secure.travis-ci.org/boxuk/versions.png?branch=master)](http://travis-ci.org/boxuk/versions)
 
 Versions is a super-simple library for comparing version numbers.
 
