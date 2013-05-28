@@ -1,5 +1,5 @@
 
-# Versions [![Build Status](https://secure.travis-ci.org/boxuk/versions.png?branch=master)](http://travis-ci.org/boxuk/versions)
+# Versions [![Build Status](https://secure.travis-ci.org/boxuk/versions.png?branch=master)](http://travis-ci.org/boxuk/versions) [![Dependencies Status](http://clj-deps.herokuapp.com/github/boxuk/versions/status.png)](http://clj-deps.herokuapp.com/github/boxuk/versions)
 
 Versions is a super-simple library for comparing version numbers.
 
